@@ -1,0 +1,32 @@
+CREATE DATABASE ada_Bradesco;
+
+USE ada_Bradesco;
+
+CREATE TABLE Cliente ( 
+	Nome VARCHAR(20) NOT NULL,
+	Sobrenome VARCHAR(50) NULL,
+	Endereço VARCHAR(100) NULL,
+	Complemento VARCHAR(30) NULL,
+	Email VARCHAR(100) PRIMARY KEY NOT NULL,
+	Telefone VARCHAR(15) NOT NULL
+);
+
+CREATE TABLE Funcionario (
+	Nome VARCHAR(50) NOT NULL,
+	Setor_atendimento VARCHAR(50) NOT NULL,
+	ID_funcionario INT PRIMARY KEY NOT NULL,
+	DT_admissao DATE NOT NULL,
+	Gestor VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE Atendimento (
+	ID_atendimento INT IDENTITY PRIMARY KEY,
+	ID_funcionario INT CONSTRAINT FK_FUNCIONARIO_ATENDIMENTO FOREIGN KEY (ID_funcionario) REFERENCES Funcionario (ID_funcionario),
+	Email_cl VARCHAR(100) CONSTRAINT FK_CLIENTE_ATENDIMENTO FOREIGN KEY (Email_cl) REFERENCES Cliente (Email),
+	Tipo_ligaçao VARCHAR(15) NOT NULL,
+	DT_abertura DATE NOT NULL,
+	DT_fechamento DATE,
+	Situaçao VARCHAR(15) NOT NULL,
+	Descriçao VARCHAR(255) NOT NULL
+);
+
